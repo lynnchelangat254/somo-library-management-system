@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div>
+  <div class="sidebar">
+    <a href="{% url 'home' %}">
+      <img src="{% static "images/somo-logo.png" %}" alt="" /> 
+    </a>
+  </hr class="w-100 bg-dark">
+    <div class="d-flex flex-column justify-content-space-between gap-5 mt-5">
+      <div class="d-flex flex-column">
+        <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="#"><i class="fas fa-user"></i> Members</a>
+        <a href="#"><i class="fas fa-user-check"></i> Membership Requests</a>
+        <a href="#"><i class="fas fa-exchange-alt"></i> Transactions</a>
+        <a href="#"><i class="fas fa-calendar-check"></i> Reservations</a>
+        <a href="#"><i class="fas fa-clock"></i> Overdue Books</a>
+        <a href="#"><i class="fas fa-book"></i> Books</a>
+        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
+        <a href="#"><i class="fas fa-calendar"></i> Events</a>
+      </div>
+    </div>
+    <div class="bottom-fixed">
+      <a href="{% url 'logout' %}"
+        ><i class="fas fa-sign-out-alt"></i> Logout</a
+      >
+    </div>
+  </div>
+
+  <div class="main-content">
+    <h2>Dashboard</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card p-5">
+          <h5>Total Books</h5>
+          <p><i class="fas fa-book"></i> 1500</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-5">
+          <h5>Members</h5>
+          <p><i class="fas fa-user"></i> 350</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-5">
+          <h5>Borrowed Books</h5>
+          <p><i class="fas fa-exchange-alt"></i> 120</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

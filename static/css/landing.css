@@ -1,0 +1,42 @@
+.section-a {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.section-a .left {
+  padding-top: 3%;
+  width: 50%;
+}
+
+.section-a .left h1 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.section-a .left p {
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #4e4f50;
+  font-weight: 500;
+}
+
+.section-a .right {
+  width: 45%;
+}
+.section-b {
+  padding: 5%;
+  padding-top: 2%;
+  padding-bottom: 0;
+}
+
+.section-b .header {
+  text-align: start !important;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  padding-left: 10px;
+}

@@ -45,6 +45,7 @@ LOCAL_APPS = [
     "apps.users",
     "apps.reservations",
     "apps.transactions",
+    "apps.core"
 ]
 
 THIRD_PARTY_APPS = [
@@ -124,7 +125,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "../static"]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 

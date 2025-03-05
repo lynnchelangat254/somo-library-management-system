@@ -10,7 +10,7 @@ class Transaction(BaseModel):
         BORROWED = "Borrowed", "Borrowed"
         RETURNED = "Returned", "Returned"
         OVERDUE = "Overdue", "Overdue"
-        LOST = "LOST", "LOST"
+        LOST = "Lost", "Lost"
 
     book = models.ForeignKey(
         Book, on_delete=models.CASCADE, related_name="book_transaction"
