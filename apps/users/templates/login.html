@@ -1,0 +1,62 @@
+{% extends "base.html"%} {% load static %} {% block content %}
+<div class="container register">
+  <div class="row">
+    <div class="col-md-3 register-left">
+      <a href="{% url 'home' %}">
+        <img class="border-rounded" src="{% static "images/somo-logo.png" %}"
+        alt="" />
+      </a>
+      <h3>Welcome to SOMO.</h3>
+      <p>Read More, Explore More, Be More.!</p>
+      <a href="{% url 'membership' %}">
+        <input
+          class="text-light"
+          type="submit"
+          name=""
+          value="Register"
+        /><br />
+      </a>
+    </div>
+    <div class="col-md-9 register-right">
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <h3 class="register-heading">Login to you account.</h3>
+          <form method="POST" action="/auth/login/" class="register-form d-flex justify-content-center">
+            {% csrf_token %}
+            <div class="col-8 col-md-8">
+              <div class="form-group">
+                <label>Email</label>
+                {{ form.email}}
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                {{ form.password }} 
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  Remember me
+                </label>
+              </div>
+              <input type="submit" class="btnRegister" value="Login" />
+            </div>
+         
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

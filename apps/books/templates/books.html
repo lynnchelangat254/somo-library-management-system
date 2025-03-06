@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Management System</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        background-color: #f5f5dc;
+        color: #333;
+      }
+      .container {
+        max-width: 1200px;
+      }
+      .list-group-item {
+        background-color: #e0d5c1;
+        border: none;
+        color: #5a4a42;
+      }
+      .list-group-item:hover {
+        background-color: #d3c4ae;
+      }
+      .card {
+        background-color: #fff;
+        border: none;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      .card img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+      .card-body {
+        text-align: center;
+      }
+      .btn-primary {
+        background-color: #5a4a42;
+        border: none;
+      }
+      .btn-primary:hover {
+        background-color: #3e322b;
+      }
+      .search-container {
+        position: relative;
+      }
+      .search-input {
+        padding-left: 40px;
+        border: 1px solid #5a4a42;
+        border-radius: 5px;
+      }
+      .search-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #5a4a42;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h2 class="text-center mb-4">Library Management System</h2>
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+          <h4><i class="fas fa-list"></i> Categories</h4>
+          <ul class="list-group">
+            <li class="list-group-item">Fiction</li>
+            <li class="list-group-item">Non-Fiction</li>
+            <li class="list-group-item">Science</li>
+            <li class="list-group-item">History</li>
+            <li class="list-group-item">Biography</li>
+          </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+          <!-- Search Bar -->
+          <div class="mb-3 search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              class="form-control search-input"
+              placeholder="Search for books..."
+            />
+          </div>
+
+          <!-- Book Listings -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card">
+                <img
+                  src="https://via.placeholder.com/150"
+                  class="card-img-top"
+                  alt="Book Cover"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Book Title</h5>
+                  <p class="card-text">Author: John Doe</p>
+                  <a href="book_detail.html" class="btn btn-primary"
+                    ><i class="fas fa-info-circle"></i> View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <img
+                  src="https://via.placeholder.com/150"
+                  class="card-img-top"
+                  alt="Book Cover"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Another Book</h5>
+                  <p class="card-text">Author: Jane Smith</p>
+                  <a href="book_detail.html" class="btn btn-primary"
+                    ><i class="fas fa-info-circle"></i> View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <img
+                  src="https://via.placeholder.com/150"
+                  class="card-img-top"
+                  alt="Book Cover"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">More Books</h5>
+                  <p class="card-text">Author: Alice Brown</p>
+                  <a href="book_detail.html" class="btn btn-primary"
+                    ><i class="fas fa-info-circle"></i> View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

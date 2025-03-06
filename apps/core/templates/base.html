@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SOMO - Read More, Explore More, Be More</title>
+
+    <!-- Favicon (optional) -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static "css/main.css" %}" /> <link
+    rel="stylesheet" href="{% static "css/auth.css" %}" /> <link
+    rel="stylesheet" href="{% static "css/navbar.css" %}" /> <link
+    rel="stylesheet" href="{% static "css/landing.css" %}" /> <link
+    rel="stylesheet" href="{% static "css/sidebar.css" %}" />
+
+    <!-- Google Fonts (Example) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- Meta Tags for SEO (Optional) -->
+    <meta name="description" content="SOMO Library Management System." />
+    <meta name="keywords" content="Library, Somo" />
+    <meta name="author" content="Lynn Chelangat" />
+
+    <!-- Open Graph Tags (For social media sharing, optional) -->
+    <meta
+      property="og:title"
+      content="SOMO - Read More, Explore More, Be More"
+    />
+    <meta
+      property="og:description"
+      content="A short description of your page."
+    />
+    <meta property="og:image" content="link-to-image.jpg" />
+    <meta property="og:url" content="https://somo.com" />
+  </head>
+  <body>
+    {% if messages %} {% for message in messages %}
+    <div
+      class="alert-box alert alert-{{ message.tags }} alert-dismissible show w-25"
+      role="alert"
+    >
+      {{ message }}
+      <button
+        type="button"
+        class="btn btn-lg close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %} {% endif %} {% block content %} {% endblock content %}
+    {%include "scripts.html" %}
+  </body>
+</html>

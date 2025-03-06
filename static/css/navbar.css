@@ -1,0 +1,22 @@
+.navbar-left {
+  margin-left: 5%;
+}
+
+.navbar-left img {
+  width: 15%;
+  border-radius: 50%;
+}
+
+.navbar-left .nav-link {
+  color: black;
+  font-weight: bold !important;
+}
+
+.member {
+  font-size: 15px;
+  margin-left: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-decoration: 2px underline !important;
+}

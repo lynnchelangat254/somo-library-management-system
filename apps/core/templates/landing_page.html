@@ -1,0 +1,101 @@
+{% extends "base.html" %} {% load static %} {% block content %} {% include "navbar.html" %}
+
+<section class="container section-a">
+  <div class="text-start left">
+    <h1 class="display-4 mb-3">Welcome to somo 🕮!</h1>
+    <p class="lead mb-4">
+      Your one-stop solution for an effortless library experience. Easily
+      browse, borrow, and manage your books in a streamlined, user-friendly
+      interface.
+    </p>
+    <p>With our system, you can:</p>
+    <ul class="list-unstyled">
+      <li>
+        <strong>Quickly Find Books:</strong> Instant search to help you find
+        what you need, fast.
+      </li>
+      <li>
+        <strong>Track Availability:</strong> Get real-time updates on the status
+        of your books.
+      </li>
+      <li>
+        <strong>Manage Your Account:</strong> Access your library account
+        anytime, anywhere.
+      </li>
+      <li>
+        <strong>Receive Personalized Recommendations:</strong> Get book
+        suggestions based on your interests.
+      </li>
+    </ul>
+    <p>
+      Join a growing community of readers and take your library experience to
+      the next level.
+    </p>
+    <a href="{% url 'books' %}" class="btn btn-dark btn-lg">Explore...</a>
+  </div>
+  <div class="right">
+    <img src="{% static 'images/reading-ill.png'%}" alt="Bookstore Logo" />
+  </div>
+</section>
+
+<section class="container section-b">
+  <h3 class="header fw-bold text-decoration-underline ml-3">Featured books</h3>
+  <div class="my-5">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card book-card">
+          <img
+            src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg"
+            class="card-img-top p-2"
+            alt="Book 1"
+          />
+          <div class="card-body text-center">
+            <h5 class="book-title">The World Black</h5>
+            <h5 class="book-author">Manucho</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card book-card">
+          <img
+            src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg"
+            class="card-img-top p-2"
+            alt="Book 2"
+          />
+          <div class="card-body start">
+            <h5 class="book-title">Missing</h5>
+            <h5 class="book-author">Manucho</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card book-card">
+          <img
+            src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg"
+            class="card-img-top p-2"
+            alt="Book 3"
+          />
+          <div class="card-body text-center">
+            <h5 class="book-title">The Hour Wasp</h5>
+            <h5 class="book-author">Manucho</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card book-card">
+          <img
+            src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg"
+            class="card-img-top p-2"
+            alt="Book 4"
+          />
+          <div class="card-body text-center">
+            <h5 class="book-title">Searching for Anna</h5>
+            <h5 class="book-author">Manucho</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "footer.html" %} {% endblock content %}

@@ -1,0 +1,32 @@
+{% load static %}
+
+<nav class="container navbar navbar-left navbar-expand-lg p-4">
+  <a class="navbar-brand" href="{% url 'home' %}">
+    <img src="{% static "images/somo-logo.png" %}"
+    alt="" />
+  </a>
+  <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="{% url "home" %}">HOME</a>
+      <a class="nav-item nav-link" href="{% url "books" %}">BOOKS</a>
+      {% if user.is_authenticated %}
+        {% if user.role == "Librarian" %}
+          <a class="nav-item nav-link" href="{% url "librarian-dashboard" %}">
+            <div class="container-fluid d-flex justify-content-end align-items-center gap-2">
+              <div class="profile-icon">
+                  <i class="fas fa-user"></i>
+              </div>
+              {{ user.first_name }}
+             </div>
+          </a>
+        {% else %}
+          <a class="nav-item nav-link" href="{% url "mechanic-dashboard" %}">Dashboard</a>
+          
+        {% endif%}
+      {% else %}
+        <a class="nav-item nav-link" href="{% url "login" %}">LOGIN</a>
+        <a class="nav-item nav-link member" href="{% url "membership" %}">BECOME A MEMBER</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
