@@ -10,6 +10,7 @@ class Member(BaseModel):
         PENDING = "Pending", "Pending"
         Approved = "Approved", "Approved"
         SUSPENDED = "Suspended", "Suspended"
+        DECLINED = "Declined", "Declined"
 
     class MembershipTypes(models.TextChoices):
         Standard = "Standard", "Standard"
@@ -17,15 +18,13 @@ class Member(BaseModel):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="members")
     member_image = models.ImageField(upload_to="members/%Y%m%d", null=True, blank=True)
-    membership_start_date = models.DateField()
-    membership_end_date = models.DateField(null=True, blank=True)
     membership_type = models.CharField(
         max_length=255, choices=MembershipTypes, default=MembershipTypes.Standard
     )
     membership_status = models.CharField(
         max_length=255, choices=MembershipStatus, default=MembershipStatus.PENDING
     )
-    date_approved = models.DateField(null=True, blank=True)
+    approval_date = models.DateField(null=True, blank=True)
     approved_by = models.ForeignKey(
         Librarian,
         related_name="approval_by",
@@ -37,7 +36,7 @@ class Member(BaseModel):
     class Meta:
         verbose_name = "Member"
         verbose_name_plural = "Members"
-        ordering = ["-membership_start_date"]
+        ordering = ["-approval_date"]
 
     def __str__(self):
         return f"{self.user.get_full_name()}  ({self.membership_type})"

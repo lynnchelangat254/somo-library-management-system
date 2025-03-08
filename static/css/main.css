@@ -8,7 +8,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background: #d7d7d6 !important;
+  background: #f3f1e8 !important;
 }
 
 .card {
@@ -42,7 +42,7 @@ body {
   width: 300px;
   height: 320px !important;
   border-radius: 5px;
-  background-color: #dcdcdc !important;
+  background-color: #f3f1e8 !important;
   box-shadow: 0 4px 20px rgba(134, 133, 133, 0.2);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   place-items: start;
@@ -113,4 +113,56 @@ body {
   bottom: 0;
   left: 0;
   bottom: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .book-card {
+    width: 100% !important;
+  }
+}
+
+.is-active {
+  background-color: #535252 !important;
+  color: white !important;
+}
+
+.search-container {
+  display: flex !important;
+}
+
+.bg-brown {
+  background-color: #535252 !important;
+}
+
+.bg-beige {
+  background-color: #f3f1e8 !important;
+}
+
+.search-btn {
+  background-color: #796f6a !important;
+  color: white !important;
+  font-size: 18px !important;
+  height: 37px !important;
+  margin-top: 1px;
+}
+
+.search-btn i {
+  margin-right: 10px;
+  color: white !important;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+.page-link {
+  color: #796f6a !important;
+  box-shadow: none !important;
+}
+
+.form-control {
+  box-shadow: none !important;
+}
+
+.disable-link {
+  pointer-events: none !important;
 }

@@ -9,7 +9,6 @@
     <title>SOMO - Read More, Explore More, Be More</title>
 
     <!-- Favicon (optional) -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
       rel="stylesheet"
@@ -53,18 +52,10 @@
   <body>
     {% if messages %} {% for message in messages %}
     <div
-      class="alert-box alert alert-{{ message.tags }} alert-dismissible show w-25"
+      class="alert-box text-center alert alert-{{ message.tags }} alert-dismissible show w-25"
       role="alert"
     >
       {{ message }}
-      <button
-        type="button"
-        class="btn btn-lg close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
     </div>
     {% endfor %} {% endif %} {% block content %} {% endblock content %}
     {%include "scripts.html" %}
