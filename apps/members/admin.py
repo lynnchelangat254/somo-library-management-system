@@ -6,11 +6,9 @@ from apps.members.models import Member
 class MemberAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "membership_start_date",
-        "membership_end_date",
         "membership_type",
         "membership_status",
-        "date_approved",
+        "approval_date",
         "approved_by",
     )
     list_per_page = 20

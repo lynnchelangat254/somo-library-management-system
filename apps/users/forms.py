@@ -1,10 +1,20 @@
 from django import forms
 
+from apps.utils.constants import COUNTRIES
+
+
+GENDER_CHOICES = [
+    ("Female", "Female"),
+    ("Male", "Male"),
+]
+
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
         label="Email",
-        widget=forms.EmailInput(attrs={"class": "form-control"}),
+        widget=forms.EmailInput(
+            attrs={"placeholder": "example@example.com", "class": "form-control"}
+        ),
         required=True,
     )
     password = forms.CharField(
@@ -16,44 +26,52 @@ class LoginForm(forms.Form):
 
 class ResetPasswordForm(forms.Form):
     email = forms.EmailField(
-        label="Email", widget=forms.EmailInput(attrs={"class": "form-control"})
+        label="Email",
+        widget=forms.EmailInput(
+            attrs={"placeholder": "example@example.com", "class": "form-control"}
+        ),
+        required=True,
     )
 
 
 class MemberRequestForm(forms.Form):
-    GENDER_CHOICES = [
-        ("Female", "Female"),
-        ("Male", "Male"),
-    ]
-
     first_name = forms.CharField(
         label="First Name",
-        widget=forms.TextInput(attrs={"class": "form-control"}),
+        widget=forms.TextInput(attrs={"placeholder": "John", "class": "form-control"}),
         required=True,
     )
     last_name = forms.CharField(
         label="Last Name",
-        widget=forms.TextInput(attrs={"class": "form-control"}),
+        widget=forms.TextInput(attrs={"placeholder": "Doe", "class": "form-control"}),
         required=True,
     )
     email = forms.EmailField(
         label="Email",
-        widget=forms.EmailInput(attrs={"class": "form-control"}),
+        widget=forms.EmailInput(
+            attrs={"placeholder": "example@example.com", "class": "form-control"}
+        ),
         required=True,
     )
     phone_number = forms.CharField(
         label="Phone Number",
-        widget=forms.TextInput(attrs={"class": "form-control"}),
+        widget=forms.TextInput(
+            attrs={"placeholder": "+254700000000", "class": "form-control"}
+        ),
         required=True,
     )
-    country = forms.CharField(
+    country = forms.ChoiceField(
         label="Country",
-        widget=forms.TextInput(attrs={"class": "form-control"}),
+        choices=COUNTRIES,
+        widget=forms.Select(
+            attrs={"placeholder": "Choose country:", "class": "form-control"}
+        ),
         required=True,
     )
     city = forms.CharField(
         label="City",
-        widget=forms.TextInput(attrs={"class": "form-control"}),
+        widget=forms.TextInput(
+            attrs={"placeholder": "City name", "class": "form-control"}
+        ),
         required=True,
     )
     gender = forms.ChoiceField(

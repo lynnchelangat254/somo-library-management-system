@@ -3,6 +3,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
 from apps.users.forms import LoginForm, MemberRequestForm
+from apps.users.models import User
+from apps.members.models import Member
 
 
 def login_user(request, *args, **kwargs):
@@ -23,7 +25,7 @@ def login_user(request, *args, **kwargs):
                     return redirect(next_url)
                 return redirect("librarian-dashboard")
             # check if user exists and user is a member
-            elif user and user.role == "member":
+            elif user and user.role == "Member":
                 messages.success(request, "User logged in successfully!")
                 login(request, user)
                 if next_url:
@@ -48,7 +50,42 @@ def membership(request, *args, **kwargs):
     if request.method == "POST":
         form = MemberRequestForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("home")
+            password = form.cleaned_data["password"]
+            confirm_password = form.cleaned_data["confirm_password"]
+
+            # check if passwords match
+            if password != confirm_password:
+                messages.warning(request, "Passwords do not match!")
+                return redirect("membership")
+
+            # check if user already exists
+            if User.objects.filter(email=form.cleaned_data["email"]).exists():
+                messages.warning(request, "User with this email already exists!")
+                return redirect("membership")
+
+            # create a new user with the provided data
+            user = User(
+                first_name=form.cleaned_data["first_name"],
+                last_name=form.cleaned_data["last_name"],
+                email=form.cleaned_data["email"],
+                phone_number=form.cleaned_data["phone_number"],
+                country=form.cleaned_data["country"],
+                city=form.cleaned_data["city"],
+                gender=form.cleaned_data["gender"],
+            )
+            user.set_password(password)
+            user.save()
+
+            # create a new member record for the created user
+            member = Member(user=user)
+            member.save()
+            messages.success(
+                request,
+                "Membership request sent successfully, kindly be patient as a librarian confirms your membership!",
+            )
+            return redirect("membership")
+
+        messages.error(request, "Membership request failed, please try again!")
+        return redirect("membership")
     form = MemberRequestForm()
     return render(request, "membership.html", {"form": form})

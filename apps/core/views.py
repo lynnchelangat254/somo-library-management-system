@@ -7,6 +7,7 @@ from apps.notifications.models import Notification
 from apps.reservations.models import Reservation
 from apps.transactions.models import Transaction
 from apps.librarians.models import Librarian
+from apps.books.models import Book
 from apps.utils.permissions import is_librarian, is_member
 
 
@@ -50,10 +51,11 @@ def librarian_dashboard(request):
     overdue_books = Transaction.objects.filter(status="Overdue").count()
     lost_books = Transaction.objects.filter(status="Lost").count()
     number_of_members = Member.objects.all().count()
+    number_of_books = Book.objects.all().count()
 
     return render(
         request,
-        "librarian_dashboard.html",
+        "librarian_dashboard_home.html",
         {
             "librarian": librarian,
             "notifications": notifications,
@@ -61,7 +63,8 @@ def librarian_dashboard(request):
             "returned_books": returned_books,
             "overdue_books": overdue_books,
             "lost_books": lost_books,
-            "members": number_of_members,
+            "number_of_members": number_of_members,
             "book_reservations": book_reservations,
+            "number_of_books": number_of_books,
         },
     )

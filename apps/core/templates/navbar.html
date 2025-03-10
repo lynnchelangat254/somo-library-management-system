@@ -9,7 +9,7 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="{% url "home" %}">HOME</a>
       <a class="nav-item nav-link" href="{% url "books" %}">BOOKS</a>
-      {% if user.is_authenticated %}
+      {% if user.is_authenticated and not user.is_admin %}
         {% if user.role == "Librarian" %}
           <a class="nav-item nav-link" href="{% url "librarian-dashboard" %}">
             <div class="container-fluid d-flex justify-content-end align-items-center gap-2">
@@ -20,8 +20,14 @@
              </div>
           </a>
         {% else %}
-          <a class="nav-item nav-link" href="{% url "mechanic-dashboard" %}">Dashboard</a>
-          
+          <a class="nav-item nav-link" href="{% url "member-dashboard" %}">
+            <div class="container-fluid d-flex justify-content-end align-items-center gap-2">
+              <div class="profile-icon">
+                  <i class="fas fa-user"></i>
+              </div>
+              {{ user.first_name }}
+            </div>
+          </a>
         {% endif%}
       {% else %}
         <a class="nav-item nav-link" href="{% url "login" %}">LOGIN</a>

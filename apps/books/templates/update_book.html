@@ -1,0 +1,10 @@
+{% extends "librarian_dashboard.html" %} {% block main_content %}
+
+<h2>Update a Book</h2>
+<form method="POST" action="{% url 'update_book' book_id=book.id %}" class="card p-4">
+  {% csrf_token %} {{ form.as_p}}
+  <button type="submit" class="btn btn-primary">
+    <i class="fas fa-save"></i> Update Book
+  </button>
+</form>
+{% endblock main_content %}
