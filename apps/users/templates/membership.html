@@ -23,7 +23,7 @@
           <h3 class="register-heading">Apply as a Member</h3>
           <form
             method="POST"
-            action="/auth/membership/"
+            action="{% url "membership" %}"
             class="row register-form"
           >
             {% csrf_token %}

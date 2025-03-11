@@ -1,6 +1,6 @@
-{% extends "librarian_dashboard.html"%} {% block main_content%}
+{% extends "member_dashboard.html"%} {% block member_main_content %}
 
-{% include "dashboard_header.html" with title="Overdue Books" %}
+{% include "dashboard_header.html" with title="Borrowed Books" %}
 <table class="table table-bordered table-striped">
   <thead class="table-dark">
     <tr>
@@ -9,9 +9,6 @@
       <th>Genre</th>
       <th>Language</th>
       <th>ISBN</th>
-      <th>Available Copies</th>
-      <th>Total Copies</th>
-      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -22,16 +19,6 @@
       <td>{{ book.genre }}</td>
       <td>{{ book.language }}</td>
       <td>{{ book.isbn }}</td>
-      <td>{{ book.available_copies }}</td>
-      <td>{{ book.total_copies }}</td>
-      <td>
-        <a href="{% url 'update-book' book.id %}" class="btn btn-warning btn-sm"
-          ><i class="fas fa-edit"></i
-        ></a>
-        <a href="{% url 'delete-book' book.id %}" class="btn btn-danger btn-sm"
-          ><i class="fas fa-trash"></i
-        ></a>
-      </td>
     </tr>
     {% endfor %} {% else %}
     <tr>
@@ -69,4 +56,4 @@
     {% endif %}
   </ul>
 </nav>
-{% endblock main_content%}
+{% endblock member_main_content %}

@@ -49,7 +49,6 @@ class BookForm(forms.ModelForm):
 
     genre = forms.ModelChoiceField(
         queryset=BookGenre.objects.all(),
-        required=False,
         widget=forms.Select(attrs={"class": "form-control"}),
         label="Genre",
     )
@@ -60,6 +59,10 @@ class BookForm(forms.ModelForm):
             attrs={"placeholder": "Enter ISBN", "class": "form-control"}
         ),
         label="ISBN",
+    )
+
+    language = forms.ChoiceField(
+        choices=Book.Languages, widget=forms.Select(attrs={"class": "form-control"})
     )
 
     edition = forms.CharField(
@@ -73,8 +76,7 @@ class BookForm(forms.ModelForm):
 
     formats = forms.ModelMultipleChoiceField(
         queryset=BookFormat.objects.all(),
-        required=False,
-        widget=forms.CheckboxSelectMultiple(attrs={"class": "form-check-input"}),
+        widget=forms.CheckboxSelectMultiple,
         label="Formats",
     )
 
@@ -103,7 +105,6 @@ class BookForm(forms.ModelForm):
     )
 
     published_date = forms.DateField(
-        required=False,
         widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}),
         label="Published Date",
     )
@@ -117,12 +118,12 @@ class BookForm(forms.ModelForm):
 
     total_copies = forms.IntegerField(
         min_value=1,
+        initial=0,
         widget=forms.NumberInput(attrs={"class": "form-control"}),
         label="Total Copies",
     )
 
     cover_image = forms.ImageField(
-        required=False,
-        widget=forms.ClearableFileInput(attrs={"class": "form-control-file"}),
+        widget=forms.FileInput(attrs={"class": "form-control-file"}),
         label="Cover Image",
     )

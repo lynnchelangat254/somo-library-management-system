@@ -14,8 +14,9 @@ urlpatterns = [
         views.cancel_reservation,
         name="cancel-reservation",
     ),
-    path("member/reservations/", views.get_reservations, name="member-reservations"),
-    path("librarian/reservations/", views.get_reservations, name="librarian-reservations"),
+    path(
+        "librarian/reservations/", views.get_reservations, name="librarian-reservations"
+    ),
     path(
         "librarian/reservations/<str:reservation_id>/",
         views.get_reservations,
@@ -25,5 +26,10 @@ urlpatterns = [
         "librarian/reservations/<str:reservation_id>/update/",
         views.update_reservation,
         name="my-reservations",
+    ),
+    path(
+        "member/reservations/",
+        views.member_reservations,
+        name="member-reservations",
     ),
 ]

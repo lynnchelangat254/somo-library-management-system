@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% load static %}{% block content %}
+
+{% include "custom_navbar.html" %}
+
+<div class="container mt-2">
+  <a href="{% url "books" %}" class="btn btn-save mb-3"
+    ><i class="fas fa-arrow-left"></i> Back to Library</a
+  >
+  <div class="card mb-5">
+    <div class="row g-0">
+      <div class="col-md-4 text-center p-3">
+        {% if book.cover_image %}
+        <img
+          src="{{ book.cover_image.url }}"
+          class="card-img-top"
+          alt="Book Cover"
+        />
+      {% else %}
+        <img
+          src="https://placehold.co/800x600"
+          class="card-img-top"
+          alt="Book Cover"
+        />
+      {% endif %}
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h1 class="card-title fw-bold">{{ book.title|capfirst }}</h1>
+          <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
+          <p class="card-text"><strong>Genre:</strong> {{ book.genre }}</p>
+          <p class="card-text"><strong>ISBN:</strong> {{ book.isbn }}</p>
+          <p class="card-text"><strong>Language:</strong> {{ book.language }}</p>
+          <p class="card-text"><strong>Edition:</strong> {{ book.edition }}</p>
+          <p class="card-text"><strong>Formats:</strong> {{ book.formats.all|join:", " }}</p>
+          <p class="card-text"><strong>Publisher:</strong> {{ book.publisher_name }}</p>
+          <p class="card-text"><strong>Published Date:</strong> {{ book.published_date }}</p>
+          <p class="card-text"><strong>Description:</strong></p>
+          <p class="card-text">{{ book.description|safe }}</p>
+          {% if user.role == "Member" and book.available_copies > 0 %}
+            <a href="{% url "borrow-book" book_id=book.id %}" class="btn btn-save">
+              <i class="fas fa-book-reader"></i> Borrow
+            </a>
+          {% endif %}
+          {% if user.role == "Member" and book.available_copies == 0 %}
+            <a href="{% url "reserve-book" book_id=book.id %}" class="btn btn-save">
+              <i class="fas fa-book-reader"></i> Reserve
+            </a>
+          {% endif%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

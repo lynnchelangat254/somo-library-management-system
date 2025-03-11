@@ -1,11 +1,73 @@
-{% extends "librarian_dashboard.html" %} {% block main_content %}
+{% extends "librarian_dashboard.html" %} {% block main_content %} {% include
+"dashboard_header.html" with title="Add Book" %}
 
-<h2>Add a Book</h2>
-<form method="POST" action="{% url 'add_book' %}" class="card p-4">
-  {% csrf_token %}
-  {{ form.as_p}}
-  <button type="submit" class="btn btn-primary">
-    <i class="fas fa-save"></i> Add Book
-  </button>
+<form method="POST" enctype="multipart/form-data" class="card p-4">
+  {% if form.errors %}
+  <div class="alert alert-danger">
+    <strong>There were some errors with your submission:</strong>
+    <ul>
+      {% for field in form %} {% for error in field.errors %}
+      <li>{{ field }} {{ error }}</li>
+      {% endfor %} {% endfor %}
+    </ul>
+  </div>
+  {% endif %} {% csrf_token %}
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    {{ form.title }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    {{ form.description }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Author</label>
+    {{ form.author }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Genre</label>
+    {{ form.genre }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">ISBN</label>
+    {{ form.isbn }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Language</label>
+    {{ form.language }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Edition</label>
+    {{ form.edition }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Formats</label>
+    {{ form.formats }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Publisher Name</label>
+    {{ form.publisher_name }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Publisher Address</label>
+    {{ form.publisher_address }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Published Date</label>
+    {{ form.published_date }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Available Copies</label>
+    {{ form.available_copies }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Total Copies</label>
+    {{ form.total_copies }}
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Cover Image</label>
+    {{ form.cover_image }}
+  </div>
+  <button type="submit" class="btn btn-save">Add Book</button>
 </form>
 {% endblock main_content %}

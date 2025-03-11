@@ -30,4 +30,18 @@ window.onload = function () {
     // Set the href attribute of the confirmDelete button
     document.getElementById("confirmDelete").setAttribute("href", deleteUrl);
   });
+
+  var deleteBookModal = document.getElementById("deleteBookBtn");
+
+  // Add an event listener to the modal's 'show.bs.modal' event
+  deleteBookModal.addEventListener("click", function (event) {
+    console.log("test");
+    var button = event.delegateTarget; // Button that triggered the modal
+    var bookId = button.getAttribute("data-id"); // Get the book ID passed in data-id
+    var deleteUrl = `/librarian/books/${bookId}/delete/`;
+    console.log(deleteUrl);
+    
+    document.getElementById("confirmDeleteBook").setAttribute("href", deleteUrl);
+  })
+
 };

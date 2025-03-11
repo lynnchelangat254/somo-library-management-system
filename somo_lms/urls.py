@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("apps.users.urls")),
@@ -13,6 +14,7 @@ urlpatterns = [
     path("", include("apps.reservations.urls")),
     path("", include("apps.notifications.urls")),
     path("", include("apps.librarians.urls")),
+    path("", include("apps.events.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

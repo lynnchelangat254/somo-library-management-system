@@ -1,0 +1,12 @@
+<div class="main-dashboard-header">
+  <h2>{{ title }}</h2>
+  {% if image %}
+  <div class="profile-icon">
+    <img src="{{ image.url }} alt="Profile Picture" />
+  </div>
+  {% else %}
+  <div class="profile-icon">
+    <i class="fas fa-user"></i>
+  </div>
+  {% endif %}
+</div>

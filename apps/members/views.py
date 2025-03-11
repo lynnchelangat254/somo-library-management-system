@@ -93,6 +93,9 @@ def approve_membership_request(request, *args, **kwargs):
         member.membership_status = "Approved"
         member.approval_date = timezone.now()
         member.approved_by = Librarian.objects.filter(user=request.user).first()
+        # update member role
+        member.user.role = "Member"
+        member.user.save()
         member.save()
         messages.success(request, "Membership request processed successfully!")
     else:

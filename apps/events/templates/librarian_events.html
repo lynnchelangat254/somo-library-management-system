@@ -1,0 +1,71 @@
+{% extends "librarian_dashboard.html"%} {% block main_content%}
+
+{% include "dashboard_header.html" with title="Events" %}
+
+<div class="d-flex justify-content-end mb-3">
+  <a href="{% url "add-event" %}" class="btn btn-save btn-md">
+      <i class="fas fa-plus"></i> Add Event
+  </a>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Max Participants</th>
+            <th>Current Participants</th>
+            <th>Event Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if events %}
+        {% for event in events %}
+        <tr>
+            <td>{{ event.name }}</td>
+            <td>{{ event.location }}</td>
+            <td>{{ event.description }}</td>
+            <td><img src="{{ event.image.url }}" alt="Event Image" class="event-image"></td>
+            <td>{{ event.max_participants }}</td>
+            <td>{{ event.current_participants }}</td>
+            <td>{{ event.event_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="7" class="text-center">No events found.</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+<nav aria-label="Page navigation" class="d-flex justify-content-end">
+  <ul class="pagination">
+    {% if events.has_previous %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ events.previous_page_number }}"
+        aria-label="Previous"
+      >
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %} {% for num in events.paginator.page_range %}
+    <li class="page-item {% if events.number == num %}is-active{% endif %}">
+      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+    </li>
+    {% endfor %} {% if events.has_next %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ events.next_page_number }}"
+        aria-label="Next"
+      >
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock main_content%}

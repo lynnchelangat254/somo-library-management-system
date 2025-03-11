@@ -1,39 +1,13 @@
 {% extends "base.html" %} {% load static %}{% block content %}
-<nav class="navbar p-3 navbar-light bg-light justify-content-between">
-  <a class="text-decoration-none h3 px-3" href="{% url 'home' %}"> 🕮 𝐒𝐎𝐌𝐎 </a>
-  <div class="d-flex">
-    <!-- User Dropdown -->
-    <a class="nav-item nav-link fw-bold" href="{% url "home" %}">Home</a>
-    {% if user.is_authenticated and not user.is_admin %}
-    {% if user.role == "Librarian" %}
-      <a class="nav-item nav-link" href="{% url "librarian-dashboard" %}">
-        <div class="container-fluid d-flex justify-content-end align-items-center gap-2">
-          <div class="profile-icon">
-              <i class="fas fa-user"></i>
-          </div>
-          {{ user.first_name }}
-         </div>
-      </a>
-    {% else %}
-      <a class="nav-item nav-link" href="{% url "member-dashboard" %}">
-        <div class="container-fluid d-flex justify-content-end align-items-center gap-2">
-          <div class="profile-icon">
-              <i class="fas fa-user"></i>
-          </div>
-          {{ user.first_name }}
-        </div>
-      </a>
-    {% endif%}
-  {% endif%}
 
-</nav>
-
+{% include "custom_navbar.html" %}
 <div class="container d-flex justify-content-center align-items-center">
   <!-- Search Bar -->
   <div class="mb-3 mt-4 d-flex w-50">
-      <div class="input-group">
+      <form class="input-group" action="{% url "books" %}" method="GET">
         <input
           class="form-control shadow-none"
+          name="query"
           type="search"
           placeholder="Search"
           aria-label="Search"
@@ -41,7 +15,7 @@
         <button class="btn search-btn bg-brown text-light py-0" type="submit">
           <i class="fas fa-search p-0"></i>
         </button>
-      </div>
+      </form>
   </div>
 </div>
 <div class="container mt-4">
@@ -50,42 +24,49 @@
     <div class="col-md-3">
       <h4>Genres</h4>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item is-active">All</li>
-        <li class="list-group-item">Fiction</li>
-        <li class="list-group-item">Non-Fiction</li>
-        <li class="list-group-item">Science</li>
-        <li class="list-group-item">History</li>
-        <li class="list-group-item">Biography</li>
+        <a href="{% url "books" %}" class="list-group-item {% if current_genre == "All" %} is-active {% endif%}">All</a>
+        {% for genre in genres %}
+          <a href="{% url "books" %}?genre={{genre.name|urlencode}}" class="list-group-item {% if current_genre == genre.name %} is-active {% endif%}">{{ genre.name }}</a>
+        {% endfor %}
       </ul>
     </div>
 
     <!-- Main Content -->
     <div class="col-md-9">
       <!-- Book Listings -->
-      <div class="row mt-4">
-        {% if books %}
+      {% if books %}
+      <div class="row">
         {% for book in books %}
         <div class="col-md-3">
-          <div class="card">
-            <img
-              src="https://placehold.co/600x400"
-              class="card-img-top"
-              alt="Book Cover"
-            />
+          <a href="{% url "book-detail" book_id=book.id %}" class="card text-decoration-none">
+            {% if book.cover_image %}
+              <img
+                src="{{ book.cover_image.url }}"
+                class="card-img-top"
+                alt="Book Cover"
+              />
+            {% else %}
+              <img
+                src="https://placehold.co/600x400"
+                class="card-img-top"
+                alt="Book Cover"
+              />
+            {% endif %}
             <div class="card-body">
               <h5 class="card-title">{{ book.title }}</h5>
               <p class="card-text">Author: {{ book.author }}</p>
             </div>
-          </div>
+          </a>
         </div>
-
-        {% endfor %}
-        {% else %}
-        <div class="col-md-12 text-center mt-4">
-          <h3>No books found.</h3>
-        </div>
-        {% endif %}        
+        {% endfor %}   
       </div>
+      {% else %}
+      <div class="row">
+          <div class="col-md-3 text-center mt-4">
+            <h3>No books found.</h3>
+          </div>
+      </div>
+      {% endif %}  
       <nav aria-label="Page navigation" class="mt-4 d-flex justify-content-end">
         <ul class="pagination">
           <li class="page-item">
@@ -106,6 +87,5 @@
         </ul>
       </nav>
     </div>
-  </div>
 </div>
 {% endblock content %}

@@ -18,16 +18,20 @@ def home(request):
 @login_required(login_url="login")
 @is_member
 def member_dashboard(request):
-    member = Member.objects.filter(request.user).first()
+    member = Member.objects.filter(user=request.user).first()
     reservations = Reservation.objects.filter(member=member).count()
-    borrowed_books = Transaction.objects.filter(status="Borrowed").count()
-    returned_books = Transaction.objects.filter(status="Returned").count()
-    overdue_books = Transaction.objects.filter(status="Overdue").count()
-    lost_books = Transaction.objects.filter(status="Lost").count()
+    borrowed_books = Transaction.objects.filter(
+        status="Borrowed", member=member
+    ).count()
+    returned_books = Transaction.objects.filter(
+        status="Returned", member=member
+    ).count()
+    overdue_books = Transaction.objects.filter(status="Overdue", member=member).count()
+    lost_books = Transaction.objects.filter(status="Lost", member=member).count()
 
     return render(
         request,
-        "member_dashboard.html",
+        "member_dashboard_home.html",
         {
             "member": member,
             "reservations": reservations,

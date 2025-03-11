@@ -18,6 +18,7 @@ def login_user(request, *args, **kwargs):
             user = authenticate(username=email, password=password)
 
             # check if user exists and user is a librarian
+            print(user.role)
             if user and user.role == "Librarian":
                 messages.success(request, "User logged in successfully!")
                 login(request, user)

@@ -45,7 +45,8 @@ LOCAL_APPS = [
     "apps.users",
     "apps.reservations",
     "apps.transactions",
-    "apps.core"
+    "apps.core",
+    "apps.events",
 ]
 
 THIRD_PARTY_APPS = [
