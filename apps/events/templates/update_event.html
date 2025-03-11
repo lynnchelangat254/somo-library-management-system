@@ -1,0 +1,39 @@
+{% extends "librarian_dashboard.html" %} {% block main_content %}
+
+{% include "dashboard_header.html" with title="Update Event" %}
+
+<form method="POST" enctype="multipart/form-data" action={% url "add-event"%}>
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_name" class="form-label">Event Name</label>
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        <label for="id_location" class="form-label">Location</label>
+        {{ form.location }}
+    </div>
+    <div class="mb-3">
+        <label for="id_description" class="form-label">Description</label>
+        {{ form.description }}
+    </div>
+    <div class="mb-3">
+        <label for="id_image" class="form-label">Event Image</label>
+        {{ form.image }}
+    </div>
+    <div class="mb-3">
+        <label for="id_max_participants" class="form-label">Max Participants</label>
+        {{ form.max_participants }}
+    </div>
+    <div class="mb-3">
+        <label for="id_current_participants" class="form-label">Current Participants</label>
+        {{ form.current_participants }}
+    </div>
+    <div class="mb-3">
+        <label for="id_event_date" class="form-label">Event Date</label>
+        {{ form.event_date }}
+    </div>
+    <button type="submit" class="btn btn-primary">Update Event</button>
+</form>
+</div>
+
+{% endblock main_content %}

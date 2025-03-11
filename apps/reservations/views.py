@@ -22,6 +22,18 @@ def get_reservations(request, *args, **kwargs):
 
 
 @login_required(login_url="login")
+@is_member
+def member_reservations(request, *args, **kwargs):
+    # Fetch all objects from the model
+    reservation_list = Reservation.objects.filter(member__user=request.user)
+    # paginate the list
+    paginator = Paginator(reservation_list, 20)  # Show 20 objects per page
+    page_number = request.GET.get("page")  # Get the page number from the request
+    reservations = paginator.get_page(page_number)  # Get the page object
+    return render(request, "member_reservations.html", {"reservations": reservations})
+
+
+@login_required(login_url="login")
 @is_librarian
 def get_reservation(request, *args, **kwargs):
     # Fetch the reservation object

@@ -1,45 +1,38 @@
-{% extends "librarian_dashboard.html" %} {% block main_content %}
-
+{% extends "member_dashboard.html" %} {% block member_main_content %}
 {% include "dashboard_header.html" with title="Dashboard" %}
 
 <div class="row">
   <div class="col-md-4 mb-3">
     <div class="card p-5">
-      <h5>Total Books</h5>
-      <p><i class="fas fa-book"></i> {{ number_of_books }}</p>
-    </div>
-  </div>
-  <div class="col-md-4 mb-3">
-    <div class="card p-5">
-      <h5>Members</h5>
-      <p><i class="fas fa-users"></i> {{ number_of_members }}</p>
-    </div>
-  </div>
-  <div class="col-md-4 mb-3">
-    <div class="card p-5">
-      <h5>Borrowed Books</h5>
+      <h5>Borrowed Books </h5>
       <p><i class="fas fa-book-open"></i> {{ borrowed_books }}</p>
     </div>
   </div>
   <div class="col-md-4 mb-3">
     <div class="card p-5">
-      <h5>Returned Books</h5>
+      <h5>Returned Books </h5>
       <p><i class="fas fa-book-reader"></i> {{ returned_books }}</p>
     </div>
   </div>
 
   <div class="col-md-4 mb-3">
     <div class="card p-5">
-      <h5>Overdue Books</h5>
+      <h5>Overdue Books </h5>
       <p><i class="fas fa-clock"></i> {{ overdue_books }}</p>
     </div>
   </div>
   <div class="col-md-4 mb-3">
     <div class="card p-5">
-      <h5>Lost Books</h5>
+      <h5>Lost Books </h5>
       <p><i class="fas fa-exclamation-circle"></i> {{ lost_books }}</p>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card p-5">
+      <h5>Reservations </h5>
+      <p><i class="fas fa-book"></i> {{ reservations }}</p>
     </div>
   </div>
 </div>
 
-{% endblock main_content %}
+{% endblock member_main_content %}

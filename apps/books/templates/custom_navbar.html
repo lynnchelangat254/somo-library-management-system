@@ -1,0 +1,27 @@
+<nav class="navbar p-3 navbar-light bg-light justify-content-between">
+    <a class="text-decoration-none h3 px-3" href="{% url 'home' %}"> 🕮 𝐒𝐎𝐌𝐎 </a>
+    <div class="d-flex">
+      <!-- User Dropdown -->
+      <a class="nav-item nav-link fw-bold" href="{% url "home" %}">Home</a>
+      {% if user.is_authenticated and not user.is_admin %}
+        {% if user.role == "Librarian" %}
+            <a class="nav-item nav-link" href="{% url "librarian-dashboard" %}">
+            <div class="container-fluid d-flex justify-content-end align-items-center gap-2">
+                <div class="profile-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                {{ user.first_name }}
+            </div>
+            </a>
+        {% else %}
+        <a class="nav-item nav-link" href="{% url "member-dashboard" %}">
+          <div class="container-fluid d-flex justify-content-end align-items-center gap-2">
+            <div class="profile-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            {{ user.first_name }}
+          </div>
+         </a>
+      {% endif%}
+   {% endif%}
+</nav>

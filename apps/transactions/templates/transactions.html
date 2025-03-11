@@ -1,6 +1,6 @@
 {% extends "librarian_dashboard.html"%} {% block main_content%}
+{% include "dashboard_header.html" with title="Transactions" %}
 
-<h2>Transactions</h2>
 <table class="table table-bordered table-striped">
   <thead class="table-dark">
     <tr>
@@ -38,23 +38,34 @@
   </tbody>
 </table>
 
-<nav aria-label="Page navigation">
+<nav aria-label="Page navigation" class="d-flex justify-content-end">
   <ul class="pagination">
+    {% if transactions.has_previous %}
     <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
+      <a
+        class="page-link"
+        href="?page={{ transactions.previous_page_number }}"
+        aria-label="Previous"
+      >
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    {% for num in transactions.paginator.page_range %}
+    {% endif %} {% for num in transactions.paginator.page_range %}
     <li class="page-item {% if transactions.number == num %}is-active{% endif %}">
       <a class="page-link" href="?page={{ num }}">{{ num }}</a>
     </li>
-    {% endfor %}
+    {% endfor %} {% if transactions.has_next %}
     <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
+      <a
+        class="page-link"
+        href="?page={{ transactions.next_page_number }}"
+        aria-label="Next"
+      >
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
+    {% endif %}
   </ul>
 </nav>
+
 {% endblock main_content%}
