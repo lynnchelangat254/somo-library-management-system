@@ -13,35 +13,40 @@ window.onload = function () {
   }, 5000); // 5 seconds delay
 
   // Get the delete modal
-  var deleteModal = document.getElementById("deleteMemberBtn");
-  console.log(deleteModal)
+  let deleteModal = document.getElementById("deleteMemberBtn");
 
   // Add an event listener to the modal's 'show.bs.modal' event
-  console.log(deleteModal);
-  deleteModal.addEventListener("click", function (event) {
+  deleteModal?.addEventListener("click", function (event) {
     console.log("test");
-    var button = event.delegateTarget; // Button that triggered the modal
-    var memberId = button.getAttribute("data-id"); // Get the member ID passed in data-id
+    let button = event.delegateTarget; // Button that triggered the modal
+    let memberId = button.getAttribute("data-id"); // Get the member ID passed in data-id
 
     // Replace the placeholder '0' in the URL with the actual member ID
-    var deleteUrl = `/librarian/members/${memberId}/delete/`;
+    let deleteUrl = `/librarian/members/${memberId}/delete/`;
     console.log(deleteUrl);
 
     // Set the href attribute of the confirmDelete button
     document.getElementById("confirmDelete").setAttribute("href", deleteUrl);
   });
 
-  var deleteBookModal = document.getElementById("deleteBookBtn");
+  let deleteBookModal = document.getElementById("deleteBookBtn");
 
   // Add an event listener to the modal's 'show.bs.modal' event
-  deleteBookModal.addEventListener("click", function (event) {
+  deleteBookModal?.addEventListener("click", function (event) {
     console.log("test");
-    var button = event.delegateTarget; // Button that triggered the modal
-    var bookId = button.getAttribute("data-id"); // Get the book ID passed in data-id
-    var deleteUrl = `/librarian/books/${bookId}/delete/`;
-    console.log(deleteUrl);
-    
-    document.getElementById("confirmDeleteBook").setAttribute("href", deleteUrl);
-  })
+    let button = event.delegateTarget; // Button that triggered the modal
+    let bookId = button.getAttribute("data-id"); // Get the book ID passed in data-id
+    let deleteUrl = `/librarian/books/${bookId}/delete/`;
 
+    // add new a tag to the modal
+    let newATag = document.createElement("a");
+    newATag.textContent = "Confirm Delete";
+    newATag.id = "confirmDeleteBook";
+    newATag.href = deleteUrl;
+    document.getElementById("deleteBookModalBody").appendChild(newATag);
+
+    document
+      .getElementById("confirmDeleteBook")
+      .setAttribute("href", deleteUrl);
+  });
 };

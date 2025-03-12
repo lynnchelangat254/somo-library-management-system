@@ -8,7 +8,7 @@ class ReservationAdmin(admin.ModelAdmin):
         "id",
         "status",
         "waiting_position",
-        "reserved_date",
+        "reservation_date",
     )
     list_per_page = 20
 

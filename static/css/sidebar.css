@@ -17,6 +17,11 @@
   color: white;
   text-decoration: none;
 }
+
+.sidebar .item-active {
+  background-color: #3e322b !important;
+}
+
 .sidebar a:hover {
   background-color: #3e322b;
 }

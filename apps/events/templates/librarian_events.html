@@ -17,6 +17,7 @@
             <th>Max Participants</th>
             <th>Current Participants</th>
             <th>Event Date</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -25,11 +26,18 @@
         <tr>
             <td>{{ event.name }}</td>
             <td>{{ event.location }}</td>
-            <td>{{ event.description }}</td>
-            <td><img src="{{ event.image.url }}" alt="Event Image" class="event-image"></td>
+            <td>{{ event.description|slice:":50" }}</td>
+            <td><img src="{{ event.image.url }}" alt="Event Image" height="60" width="60" class="event-image"></td>
             <td>{{ event.max_participants }}</td>
             <td>{{ event.current_participants }}</td>
             <td>{{ event.event_date }}</td>
+            <td>
+              <a href="{% url 'update-event' event_id=event.id %}" class="btn btn-warning btn-sm"
+                ><i class="fas fa-edit"></i
+              ></a>
+              <button id="deleteEventBtn" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ event.id }}"><i class="fas fa-trash"></i> Delete</button>
+            </td>
+          </tr>
         </tr>
         {% endfor %}
         {% else %}

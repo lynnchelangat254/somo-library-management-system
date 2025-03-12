@@ -8,15 +8,16 @@
   </hr class="w-100 bg-dark">
     <div class="d-flex flex-column justify-content-space-between gap-5 mt-5">
       <div class="d-flex flex-column">
-        <a href="{% url "librarian-dashboard" %}"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="{% url "members" %}"><i class="fas fa-user"></i> Members</a>
-        <a href="{% url "membership-requests" %}"><i class="fas fa-user-check"></i> Membership Requests</a>
-        <a href="{% url "transactions" %}"><i class="fas fa-exchange-alt"></i> Transactions</a>
-        <a href="{% url "librarian-reservations" %}"><i class="fas fa-calendar-check"></i> Reservations</a>
-        <a href="{% url "librarian-overdue-books" %}"><i class="fas fa-clock"></i> Overdue Books</a>
-        <a href="{% url "librarian-books" %}"><i class="fas fa-book"></i> Books</a>
+        <a href="{% url "librarian-dashboard" %}" class="{% if request.path == '/librarian/' %}item-active{% endif %}"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="{% url "members" %}" class="{% if request.path == '/librarian/members/' %}item-active{% endif %}"><i class="fas fa-user"></i> Members</a>
+        <a href="{% url "membership-requests" %}" class="{% if request.path == '/librarian/requests/' %}item-active{% endif %}"><i class="fas fa-user-check"></i> Membership Requests</a>
+        <a href="{% url "transactions" %}" class="{% if request.path == '/librarian/transactions/' %}item-active{% endif %}"><i class="fas fa-exchange-alt"></i> Transactions</a>
+        <a href="{% url "librarian-reservations" %}" class="{% if request.path == '/librarian/reservations/' %}item-active{% endif %}"><i class="fas fa-calendar-check"></i> Reservations</a>
+        <a href="{% url "librarian-overdue-books" %}" class="{% if request.path == '/librarian/overdue-books/' %}item-active{% endif %}"><i class="fas fa-clock"></i> Overdue Books</a>
+        <a href="{% url "librarian-books" %}" class="{% if request.path == '/librarian/books/' %}item-active{% endif %}"><i class="fas fa-book"></i> Books</a>
+        <a href="{% url "librarian-events" %}" class="{% if request.path == '/librarian/events/' %}item-active{% endif %}"><i class="fas fa-calendar"></i> Events</a>
         <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
-        <a href="{% url "librarian-events" %}"><i class="fas fa-calendar"></i> Events</a>
+      
       </div>
     </div>
     <div class="bottom-fixed">

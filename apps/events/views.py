@@ -13,7 +13,7 @@ def get_events(request, *args, **kwargs):
     event_list = Event.objects.all()
 
     # paginate events
-    paginator = Paginator(event_list, 20)
+    paginator = Paginator(event_list, 15)
     page_number = request.GET.get("page")
     events = paginator.get_page(page_number)
 
@@ -34,7 +34,7 @@ def librarian_get_events(request, *args, **kwargs):
     # Fetch all events from the database
     event_list = Event.objects.all()
     # paginate events
-    paginator = Paginator(event_list, 20)
+    paginator = Paginator(event_list, 15)
     page_number = request.GET.get("page")
     events = paginator.get_page(page_number)
     return render(request, "librarian_events.html", {"events": events})
@@ -45,11 +45,14 @@ def librarian_get_events(request, *args, **kwargs):
 def create_event(request, *args, **kwargs):
     # Add a new event to the database
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Event added successfully!")
-            return redirect("events")
+            return redirect("librarian-events")
+        else:
+            messages.error(request, "Book not added. Please check the form.")
+            return render(request, "create_event.html", {"form": form})
     form = EventForm()
     return render(request, "create_event.html", {"form": form})
 
@@ -63,7 +66,7 @@ def update_event(request, *args, **kwargs):
         messages.error(request, "Event not found.")
         return redirect("librarian-events")
     if request.method == "POST":
-        form = EventForm(request.POST, instance=event)
+        form = EventForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             form.save()
             messages.success(request, "Event updated successfully!")
@@ -78,7 +81,10 @@ def delete_event(request, *args, **kwargs):
     # Delete an event from the database by id
     event_id = kwargs.get("event_id")
     event = Event.objects.filter(pk=event_id).first()
-    if event is not None:
-        event.delete()
-        return redirect("events")
-    return redirect("events")
+    if event is None:
+        messages.error(request, "Event not found.")
+        return redirect("librarian-events")
+
+    event.delete()
+    messages.success(request, "Event deleted successfully!")
+    return redirect("librarian-events")

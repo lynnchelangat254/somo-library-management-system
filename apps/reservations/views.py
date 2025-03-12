@@ -14,7 +14,7 @@ def get_reservations(request, *args, **kwargs):
     # Fetch all objects from the model
     reservation_list = Reservation.objects.all()
     # paginate the list
-    paginator = Paginator(reservation_list, 20)  # Show 20 objects per page
+    paginator = Paginator(reservation_list, 15)  # Show 20 objects per page
     page_number = request.GET.get("page")  # Get the page number from the request
     reservations = paginator.get_page(page_number)  # Get the page object
 
@@ -27,7 +27,7 @@ def member_reservations(request, *args, **kwargs):
     # Fetch all objects from the model
     reservation_list = Reservation.objects.filter(member__user=request.user)
     # paginate the list
-    paginator = Paginator(reservation_list, 20)  # Show 20 objects per page
+    paginator = Paginator(reservation_list, 15)  # Show 20 objects per page
     page_number = request.GET.get("page")  # Get the page number from the request
     reservations = paginator.get_page(page_number)  # Get the page object
     return render(request, "member_reservations.html", {"reservations": reservations})
@@ -56,22 +56,6 @@ def update_reservation(request, *args, **kwargs):
     else:
         form = ReservationForm(instance=reservation)
     return render(request, "update_reservation.html", {"form": form})
-
-
-@login_required(login_url="login")
-@is_member
-def reserve_book(request, *args, **kwargs):
-    # Reserve a book for a member
-    book_id = kwargs.get("book_id")
-    member_id = kwargs.get("member_id")
-    waiting_position = Reservation.objects.filter(book_id=book_id).count() + 1
-    reservation = Reservation.objects.create(
-        book_id=book_id, member_id=member_id, waiting_position=waiting_position
-    )
-    messages.success(
-        request, f"Reservation for book {reservation.book.title} made successfully."
-    )
-    return redirect("member-dashboard")
 
 
 @login_required(login_url="login")

@@ -2,7 +2,7 @@
 
 {% include "dashboard_header.html" with title="Update Event" %}
 
-<form method="POST" enctype="multipart/form-data" action={% url "add-event"%}>
+<form method="POST" enctype="multipart/form-data" class="card p-4">
     {% csrf_token %}
     <div class="mb-3">
         <label for="id_name" class="form-label">Event Name</label>
@@ -23,10 +23,6 @@
     <div class="mb-3">
         <label for="id_max_participants" class="form-label">Max Participants</label>
         {{ form.max_participants }}
-    </div>
-    <div class="mb-3">
-        <label for="id_current_participants" class="form-label">Current Participants</label>
-        {{ form.current_participants }}
     </div>
     <div class="mb-3">
         <label for="id_event_date" class="form-label">Event Date</label>

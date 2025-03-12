@@ -35,10 +35,10 @@
     <div class="col-md-9">
       <!-- Book Listings -->
       {% if books %}
-      <div class="row">
+      <div class="row w-100">
         {% for book in books %}
-        <div class="col-md-3">
-          <a href="{% url "book-detail" book_id=book.id %}" class="card text-decoration-none">
+        <div class="col-md-4 ">
+          <a href="{% url "book-detail" book_id=book.id %}" class="card book-card mb-3 text-decoration-none">
             {% if book.cover_image %}
               <img
                 src="{{ book.cover_image.url }}"
@@ -53,7 +53,7 @@
               />
             {% endif %}
             <div class="card-body">
-              <h5 class="card-title">{{ book.title }}</h5>
+              <h5 class="card-title">{{ book.title|capfirst }}</h5>
               <p class="card-text">Author: {{ book.author }}</p>
             </div>
           </a>

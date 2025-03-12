@@ -21,11 +21,11 @@ class Reservation(BaseModel):
         max_length=255, choices=ReservationStatus, default=ReservationStatus.PENDING
     )
     waiting_position = models.IntegerField(default=1)
-    reserved_date = models.DateTimeField(auto_now_add=True)
-
+    reservation_date = models.DateTimeField(auto_now_add=True)
+    
     class Meta:
         verbose_name_plural = "Reservations"
-        ordering = ["-reserved_date"]
+        ordering = ["-reservation_date"]
 
     def __str__(self):
-        return f"{self.book.name}"
+        return f"{self.book.title}"

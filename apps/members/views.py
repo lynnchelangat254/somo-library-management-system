@@ -7,7 +7,8 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.utils import timezone
+
+from datetime import datetime
 
 
 @login_required(login_url="login")
@@ -16,7 +17,7 @@ def get_members(request, *args, **kwargs):
     # Fetch all objects from the model
     member_list = Member.objects.filter(membership_status="Approved")
     # paginate the list
-    paginator = Paginator(member_list, 20)
+    paginator = Paginator(member_list, 15)
     page_number = request.GET.get("page")
     members = paginator.get_page(page_number)
 
@@ -73,7 +74,7 @@ def get_membership_requests(request, *args, **kwargs):
     # Fetch all membership requests from the model
     membership_requests = Member.objects.filter(membership_status="Pending")
     # paginate the list
-    paginator = Paginator(membership_requests, 20)
+    paginator = Paginator(membership_requests, 15)
     page_number = request.GET.get("page")
     requests = paginator.get_page(page_number)
     return render(request, "membership_requests.html", {"requests": requests})
@@ -91,7 +92,7 @@ def approve_membership_request(request, *args, **kwargs):
         return redirect("membership-requests")
     if member.membership_status == "Pending":
         member.membership_status = "Approved"
-        member.approval_date = timezone.now()
+        member.approval_date = datetime.now()
         member.approved_by = Librarian.objects.filter(user=request.user).first()
         # update member role
         member.user.role = "Member"
