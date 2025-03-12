@@ -1,4 +1,4 @@
-# **SOMO Library Management System (LMS) - README**
+# **SOMO Library Management System (LMS) **
 
 ## **📌 Project Overview**
 SOMO Library Management System (LMS) is a **scalable, efficient, and user-friendly** web application designed to streamline **library operations**. It enables **admins, librarians, and members** to manage books, track borrowing history, process reservations, handle overdue notifications, and generate reports.
@@ -20,8 +20,8 @@ SOMO Library Management System (LMS) is a **scalable, efficient, and user-friend
 
 ### **Frontend:**
 - **Django Templates** (MVT-based UI rendering)
-- **Bootstrap/Tailwind CSS** (Responsive design)
-- **jQuery/HTMX** (For interactivity without APIs)
+- **Bootstrap CSS** (Responsive design)
+- **Javascript** (For interactivity without APIs)
 
 ### **Deployment & DevOps:**
 - **AWS/GCP** (Cloud hosting)
