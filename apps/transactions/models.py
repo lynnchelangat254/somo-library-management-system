@@ -18,6 +18,7 @@ class Transaction(BaseModel):
     member = models.ForeignKey(
         Member, on_delete=models.CASCADE, related_name="member_transaction"
     )
+    book_format = models.CharField(max_length=255, default="Paperback")
     borrow_date = models.DateTimeField(auto_now_add=True)
     return_date = models.DateTimeField(null=True, blank=True)
     fine_amount = models.DecimalField(max_digits=6, decimal_places=2, default=0.0)
@@ -26,8 +27,8 @@ class Transaction(BaseModel):
     )
 
     class Meta:
-        verbose_name_plural = "Transaction"
+        verbose_name_plural = "Transactions"
         ordering = ["-borrow_date"]
 
     def __str__(self):
-        return f"{self.book.name}  {self.borrow_date}"
+        return f"{self.book.title}  {self.borrow_date}"

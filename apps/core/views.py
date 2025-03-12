@@ -12,7 +12,8 @@ from apps.utils.permissions import is_librarian, is_member
 
 
 def home(request):
-    return render(request, "landing_page.html", {})
+    books = Book.objects.all().order_by("-created_at")[:4]
+    return render(request, "landing_page.html", {"books": books})
 
 
 @login_required(login_url="login")

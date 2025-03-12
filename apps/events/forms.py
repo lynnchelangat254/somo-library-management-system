@@ -29,7 +29,8 @@ class EventForm(forms.ModelForm):
         required=True, widget=forms.Textarea(attrs={"class": "form-control"})
     )
     image = forms.ImageField(
-        required=True, widget=forms.ClearableFileInput(attrs={"class": "form-control"})
+        required=True,
+        widget=forms.FileInput(attrs={"class": "form-control-file"}),
     )
     max_participants = forms.IntegerField(
         required=True, widget=forms.NumberInput(attrs={"class": "form-control"})

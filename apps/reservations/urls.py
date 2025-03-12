@@ -5,12 +5,7 @@ from apps.reservations import views
 
 urlpatterns = [
     path(
-        "member/<str:member_id>/reserve/<str:book_id>/send/",
-        views.reserve_book,
-        name="reserve-book",
-    ),
-    path(
-        "member/<str:member_id>/reserve/<str:book_id>/cancel/",
+        "member/reservations/<str:book_id>/cancel/",
         views.cancel_reservation,
         name="cancel-reservation",
     ),

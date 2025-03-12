@@ -1,5 +1,5 @@
-{% extends "librarian_dashboard.html" %} {% block main_content %} {% include
-  "dashboard_header.html" with title="Update Book" %}
+{% extends "librarian_dashboard.html" %} {% block main_content %}
+{% include "dashboard_header.html" with title="Update Book" %}
   
   <form method="POST" enctype="multipart/form-data" class="card p-4">
     {% if form.errors %}
@@ -63,6 +63,10 @@
     <div class="mb-3">
       <label class="form-label">Total Copies</label>
       {{ form.total_copies }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Cover Image</label>
+      {{ form.cover_image }}
     </div>
     <button type="submit" class="btn btn-save">Update Book</button>
   </form>

@@ -10,4 +10,9 @@ urlpatterns = [
         views.get_transaction,
         name="transaction-detail",
     ),
+    path(
+        "librarian/transactions/<str:transaction_id>/update/",
+        views.update_transaction,
+        name="update-transaction",
+    ),
 ]

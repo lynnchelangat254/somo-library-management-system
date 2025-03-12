@@ -4,9 +4,18 @@
 <form
   method="POST"
   enctype="multipart/form-data"
-  action="{% url 'add-event' %}"
   class="card p-4"
 >
+{% if form.errors %}
+<div class="alert alert-danger">
+  <strong>There were some errors with your submission:</strong>
+  <ul>
+    {% for field in form %} {% for error in field.errors %}
+    <li>{{ field }} {{ error }}</li>
+    {% endfor %} {% endfor %}
+  </ul>
+</div>
+{% endif %} 
   {% csrf_token %}
   <div class="mb-3">
     <label for="id_name" class="form-label">Event Name</label>
@@ -27,12 +36,6 @@
   <div class="mb-3">
     <label for="id_max_participants" class="form-label">Max Participants</label>
     {{ form.max_participants }}
-  </div>
-  <div class="mb-3">
-    <label for="id_current_participants" class="form-label"
-      >Current Participants</label
-    >
-    {{ form.current_participants }}
   </div>
   <div class="mb-3">
     <label for="id_event_date" class="form-label">Event Date</label>

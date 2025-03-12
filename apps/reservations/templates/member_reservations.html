@@ -7,9 +7,10 @@
       <th>ID</th>
       <th>Book</th>
       <th>Member</th>
-      <th>Reserved Date</th>
+      <th>Reservation Date</th>
       <th>Waiting Position</th>
       <th>Status</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -17,8 +18,10 @@
     <tr>
       <td>{{ reservation.id }}</td>
       <td>{{ reservation.book.title }}</td>
-      <td>{{ reservation.member.name }}</td>
-      <td>{{ reservation.reserved_date }}</td>
+      <td>
+        {{ reservation.member.user.first_name }} {{ reservation.member.user.last_name }}
+      </td>
+      <td>{{ reservation.reservation_date }}</td>
       <td>{{ reservation.waiting_position }}</td>
       <td>
         <span
@@ -26,6 +29,13 @@
         >
           {{ reservation.status }}
         </span>
+      </td>
+      <td>
+        <a
+          href="{% url 'cancel-reservation' reservation.id %}"
+          class="btn btn-danger btn-sm"
+          ><i class="fas fa-trash"></i> Cancel</a
+        >
       </td>
     </tr>
     {% endfor %} {% else %}

@@ -37,19 +37,91 @@
           <p class="card-text"><strong>Description:</strong></p>
           <p class="card-text">{{ book.description|safe }}</p>
           {% if user.role == "Member" and book.available_copies > 0 %}
-            <a href="{% url "borrow-book" book_id=book.id %}" class="btn btn-save">
-              <i class="fas fa-book-reader"></i> Borrow
-            </a>
+              <!-- Borrow Button (Trigger Modal) -->
+            <button type="button" class="btn btn-save" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
+                <i class="fas fa-book-reader"></i> Borrow Book
+            </button>
           {% endif %}
           {% if user.role == "Member" and book.available_copies == 0 %}
-            <a href="{% url "reserve-book" book_id=book.id %}" class="btn btn-save">
-              <i class="fas fa-book-reader"></i> Reserve
-            </a>
+            <button type="button" class="btn btn-save" data-bs-toggle="modal" data-bs-target="#reserveBookModal">
+                <i class="fas fa-book-reader"></i> Reserve Book
+            </button>
           {% endif%}
         </div>
       </div>
     </div>
   </div>
+<!-- Borrow Book Modal -->
+<div class="modal fade" id="borrowBookModal" tabindex="-1" aria-labelledby="borrowBookModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="borrowBookModalLabel">Borrow Book</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form method="post" action="{% url 'borrow-book' book_id=book.id %}">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                      <label for="bookTitle" class="form-label">Book Title</label>
+                      <input type="text" class="form-control" id="bookTitle" value="{{ book.title }}" readonly>
+                  </div>
+                  <div class="mb-3">
+                      <label for="formatSelect" class="form-label">Select Format</label>
+                      <select class="form-select" id="formatSelect" name="format">
+                          {% for format in book.formats.all %}
+                          <option value="{{ format.name }}">{{ format }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                      <label for="borrowDuration" class="form-label">Borrow Duration (Days)</label>
+                      <input type="number" class="form-control" id="borrowDuration" name="duration" min="1" max="14" value="7">
+                  </div>
+                  <div class="d-flex justify-content-end">
+                  <button type="submit" class="btn btn-save">Confirm Borrow</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Borrow Book Modal -->
+<div class="modal fade" id="reserveBookModal" tabindex="-1" aria-labelledby="borrowBookModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="borrowBookModalLabel">Reserve Book</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form method="post" action="{% url 'reserve-book' book_id=book.id %}">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                      <label for="bookTitle" class="form-label">Book Title</label>
+                      <input type="text" class="form-control" id="bookTitle" value="{{ book.title }}" readonly>
+                  </div>
+                  <div class="mb-3">
+                      <label for="formatSelect" class="form-label">Select Format</label>
+                      <select class="form-select" id="formatSelect" name="format">
+                          {% for format in book.formats.all %}
+                          <option value="{{ format.name }}">{{ format }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                      <label for="borrowDuration" class="form-label">Borrow Duration (Days)</label>
+                      <input type="number" class="form-control" id="borrowDuration" name="duration" min="1" max="14" value="7">
+                  </div>
+                  <div class="d-flex justify-content-end">
+                  <button type="submit" class="btn btn-save text-center">Confirm Reserve</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
 </div>
 
 {% endblock content %}

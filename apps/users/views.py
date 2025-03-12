@@ -18,7 +18,6 @@ def login_user(request, *args, **kwargs):
             user = authenticate(username=email, password=password)
 
             # check if user exists and user is a librarian
-            print(user.role)
             if user and user.role == "Librarian":
                 messages.success(request, "User logged in successfully!")
                 login(request, user)
@@ -56,12 +55,12 @@ def membership(request, *args, **kwargs):
 
             # check if passwords match
             if password != confirm_password:
-                messages.warning(request, "Passwords do not match!")
+                messages.error(request, "Passwords do not match!")
                 return redirect("membership")
 
             # check if user already exists
             if User.objects.filter(email=form.cleaned_data["email"]).exists():
-                messages.warning(request, "User with this email already exists!")
+                messages.error(request, "User with this email already exists!")
                 return redirect("membership")
 
             # create a new user with the provided data
