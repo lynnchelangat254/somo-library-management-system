@@ -1,4 +1,4 @@
-# **SOMO Library Management System (LMS) **
+# **SOMO Library Management System (LMS)**
 
 ## **📌 Project Overview**
 SOMO Library Management System (LMS) is a **scalable, efficient, and user-friendly** web application designed to streamline **library operations**. It enables **admins, librarians, and members** to manage books, track borrowing history, process reservations, handle overdue notifications, and generate reports.
