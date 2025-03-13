@@ -12,9 +12,10 @@
           <a href="{% url "member-dashboard" %}" class="{% if request.path == '/member/' %}item-active{% endif %}"><i class="fas fa-home"></i> Dashboard</a>
           <a href="{% url "borrowed-books" %}" class="{% if request.path == '/member/borrowed-books/' %}item-active{% endif %}"><i class="fas fa-user"></i> Borrowed Books</a>
           <a href="{% url "member-reservations" %}" class="{% if request.path == '/member/reservations/' %}item-active{% endif %}"><i class="fas fa-user-check"></i> Reservations</a>
-          <a href="#"><i class="fas fa-exchange-alt"></i> Notifications</a>
+          <a href="{% url "notifications" %}" class="{% if request.path == '/member/notifications/' %}item-active{% endif %}"><i class="fas fa-exchange-alt"></i> Notifications</a>
         </div>
       </div>
+      
       <div class="bottom-fixed">
         <a href="{% url 'logout' %}"
           ><i class="fas fa-sign-out-alt"></i> Logout</a

@@ -1,6 +1,7 @@
 from django.db import models
 
 from apps.utils.base import BaseModel
+from apps.members.models import Member
 
 
 class Notification(BaseModel):
@@ -10,6 +11,9 @@ class Notification(BaseModel):
         SYSTEM_NOTIFICATION = "System Notification", "System Notification"
         DUE_DATE = "DUE Date", "DUE Date"
 
+    recipient = models.ForeignKey(
+        Member, on_delete=models.CASCADE, related_name="notifications"
+    )
     title = models.CharField(max_length=255)
     message = models.TextField(max_length=1000)
     type = models.CharField(max_length=255, choices=NotificationTypes)
