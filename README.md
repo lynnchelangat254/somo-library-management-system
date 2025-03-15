@@ -66,8 +66,9 @@ $ cd somo-lms
 ### **2. Setup Virtual Environment & Install Dependencies**
 ```bash
 $ python3 -m venv venv
-$ source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+$ source venv/bin/activate  # On Windows use `env\Scripts\activate`
 $ pip install -r requirements.txt
+$ python manage.py makemigrations
 $ python manage.py migrate
 $ python manage.py runserver
 ```
