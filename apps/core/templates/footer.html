@@ -29,13 +29,19 @@
         <p>Monthly digest of what's new and exciting from us.</p>
         <div class="d-flex flex-column flex-sm-row w-100 gap-2">
           <label for="newsletter1" class="visually-hidden">Email address</label>
-          <input
-            id="newsletter1"
-            type="text"
-            class="form-control"
-            placeholder="Email address"
-          />
-          <input class="btn btn-dark" type="button" value="Subscribe" />
+          <form method="post" action="{% url "subscribe-to-newsletter" %}">
+            {% csrf_token %}
+            <input
+              id="newsletter"
+              name="email"
+              type="email"
+              class="form-control"
+              placeholder="Email address"
+            />
+            <button  class="btn btn-dark" type="submit">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
         </div>
       </form>
     </div>

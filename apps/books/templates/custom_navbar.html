@@ -2,7 +2,10 @@
     <a class="text-decoration-none h3 px-3" href="{% url 'home' %}"> 🕮 𝐒𝐎𝐌𝐎 </a>
     <div class="d-flex">
       <!-- User Dropdown -->
-      <a class="nav-item nav-link fw-bold" href="{% url "home" %}">Home</a>
+      <div class="d-flex gap-3">
+        <a class="nav-item nav-link fw-bold" href="{% url "home" %}">Home</a>
+        <a class="nav-item nav-link fw-bold" href={% url "events" %}>Events</a>
+      </div>
       {% if user.is_authenticated and not user.is_admin %}
         {% if user.role == "Librarian" %}
             <a class="nav-item nav-link" href="{% url "librarian-dashboard" %}">
