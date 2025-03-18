@@ -3,9 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
 
-from apps.utils.permissions import is_librarian
-from apps.events.models import Event
+from apps.utils.permissions import is_librarian, is_member
+from apps.events.models import Event, EventRegistration
 from apps.events.forms import EventForm
+from apps.members.models import Member
 
 
 def get_events(request, *args, **kwargs):
@@ -26,6 +27,29 @@ def get_event(request, *args, **kwargs):
     if event is None:
         return redirect("events")
     return render(request, "event_detail.html", {"event": event})
+
+
+@login_required
+@is_member
+def register_event_member(request, *args, **kwargs):
+    # Register a user for an event by id
+    event = Event.objects.filter(id=kwargs.get("event_id")).first()
+    member = Member.objects.filter(user=request.user).first()
+    if event is None:
+        messages.error(request, "Event not found.")
+        return redirect("events")
+
+    # check if member is already registered
+    if EventRegistration.objects.filter(participant=member).exists():
+        messages.error(request, "You have already registered for this event.")
+        return redirect("event-detail", event_id=event.id)
+
+    event_registration = EventRegistration.objects.create(
+        event=event, participant=member
+    )
+
+    messages.success(request, "Registration successful!")
+    redirect("event-detail", event_id=event.id)
 
 
 @login_required

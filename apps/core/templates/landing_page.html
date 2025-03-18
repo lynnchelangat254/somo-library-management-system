@@ -43,7 +43,7 @@
   <div class="my-5">
     <div class="row">
       {% for book in books %}
-        <div class="col-md-3">
+        <a href="{% url "book-detail" book_id=book.id %}" class="col-md-3 text-decoration-none">
           <div class="card book-card">
             <img
               src="{{ book.cover_image.url}}"
@@ -55,7 +55,7 @@
               <h5 class="book-author">Author: {{ book.author }}</h5>
             </div>
           </div>
-        </div>
+        </a>
       {% endfor %}
     </div>
   </div>

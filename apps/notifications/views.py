@@ -5,13 +5,16 @@ from django.contrib import messages
 
 from apps.notifications.models import Notification
 from apps.utils.permissions import is_member, is_librarian
+from apps.members.models import Member
 
 
 @login_required
 @is_member
 def get_notifications(request, *args, **kwargs):
+
+    member = Member.objects.filter(user=request.user).first()
     notification_list = Notification.objects.filter(
-        recipient=request.user, is_read=False
+        recipient=member, read=False
     ).order_by("-created_at")
 
     paginator = Paginator(notification_list, 15)
@@ -30,7 +33,7 @@ def update_notification(request, *args, **kwargs):
         messages.error(request, "Notification not found.")
         return redirect("notifications")
 
-    notification.is_read = True
+    notification.read = True
     notification.save()
     messages.success(request, "Notification marked as read.")
     return redirect("notifications")

@@ -30,9 +30,11 @@ class EventRegistration(BaseModel):
         CANCELLED = "Cancelled", "Cancelled"
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    participant = models.ForeignKey(Member, related_name="event_member", on_delete=models.CASCADE)
+    participant = models.ForeignKey(
+        Member, related_name="event_member", on_delete=models.CASCADE
+    )
     registration_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=255, choices=Status)
+    status = models.CharField(max_length=255, choices=Status, default=Status.REGISTERED)
 
     class Meta:
         verbose_name_plural = "Registrations"

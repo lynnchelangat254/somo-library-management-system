@@ -5,6 +5,9 @@ from apps.events import views
 urlpatterns = [
     path("events/", views.get_events, name="events"),
     path("events/<str:event_id>/", views.get_event, name="event-detail"),
+    path(
+        "events/<str:event_id>/register/", views.register_event_member, name="register-event-member"
+    ),
     path("librarian/events/", views.librarian_get_events, name="librarian-events"),
     path(
         "librarian/events/<str:event_id>/update/",

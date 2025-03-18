@@ -9,11 +9,10 @@
       {% if events %}
       <div class="row w-100">
         {% for event in events %}
-        <div class="col-md-4 card book-card mb-3 text-decoration-none ">
+        <a  href="{% url "event-detail" event_id=event.id %}" class="col-md-3 card book-card mb-3 text-decoration-none" style="height: auto !important;">
             {% if event.image %}
               <img
                 src="{{ event.image.url }}"
-                class="card-img-top"
                 alt="Book Cover"
               />
             {% else %}
@@ -24,12 +23,12 @@
               />
             {% endif %}
             <div class="card-body">
-              <h5 class="card-title">{{ event.name|capfirst }}</h5>
-              <p class="card-text"> {{ event.description|slice:":100" }} </p>
-              <p class="card-text">Location: {{ event.description }}</p>
+              <h4 class="card-title">{{ event.name|capfirst }}</h4>
+              <p class="card-text"> {{ event.description|slice:":50" }}... </p>
+              <p class="card-text">Location: {{ event.location }}</p>
               <p class="card-text">Date: {{ event.event_date }}</p>
             </div>
-        </div>
+          </a>
         {% endfor %}   
       </div>
       {% else %}

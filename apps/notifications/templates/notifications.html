@@ -1,10 +1,27 @@
-{% extends "member_dashboard.html"%} {% block member_main_content %} {% include
-"dashboard_header.html" with title="Notifications" %}
+{% extends "member_dashboard.html"%} {% block member_main_content %}
+{% include "dashboard_header.html" with title="Notifications" %}
 
-<div class="alert alert-info" role="alert">
-  <strong>Welcome!</strong> This is your personalized notifications section. You
-  will receive notifications about new books, upcoming due dates, and any other
-  important updates.
-</div>
+<ul class="list-group">
+  {% for notification in notifications %}
+  <li class="list-group-item">
+    <!-- Notification Title -->
+    <a
+      href="#notification-{{ notification.id }}"
+      data-bs-toggle="collapse"
+      aria-expanded="false"
+      aria-controls="notification-{{ notification.id }}"
+    >
+      <strong>{{ notification.title }}</strong>
+    </a>
+
+    <!-- Collapsible Message -->
+    <div class="collapse" id="notification-{{ notification.id }}">
+      <p class="mt-2">{{ notification.message }}</p>
+    </div>
+  </li>
+  {% empty %}
+  <li class="list-group-item">No new notifications.</li>
+  {% endfor %}
+</ul>
 
 {% endblock member_main_content %}
