@@ -6,7 +6,14 @@ urlpatterns = [
     path("events/", views.get_events, name="events"),
     path("events/<str:event_id>/", views.get_event, name="event-detail"),
     path(
-        "events/<str:event_id>/register/", views.register_event_member, name="register-event-member"
+        "events/<str:event_id>/register/",
+        views.register_event_member,
+        name="register-event-member",
+    ),
+    path(
+        "events/<str:event_id>/unregister/",
+        views.unregister_event_member,
+        name="unregister-event-member",
     ),
     path("librarian/events/", views.librarian_get_events, name="librarian-events"),
     path(

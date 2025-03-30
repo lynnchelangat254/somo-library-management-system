@@ -24,9 +24,16 @@ def get_events(request, *args, **kwargs):
 def get_event(request, *args, **kwargs):
     # Fetch a specific event from the database
     event = Event.objects.filter(pk=kwargs.get("event_id")).first()
+
+    member = Member.objects.filter(user=request.user).first()
+    # check if member is already a participant
+    is_participant = EventRegistration.objects.filter(participant=member).exists()
+
     if event is None:
         return redirect("events")
-    return render(request, "event_detail.html", {"event": event})
+    return render(
+        request, "event_detail.html", {"event": event, "is_participant": is_participant}
+    )
 
 
 @login_required
@@ -47,9 +54,35 @@ def register_event_member(request, *args, **kwargs):
     event_registration = EventRegistration.objects.create(
         event=event, participant=member
     )
+    event.current_participants = event.current_participants + 1
+    event.save()
 
     messages.success(request, "Registration successful!")
-    redirect("event-detail", event_id=event.id)
+    return redirect("event-detail", event_id=event.id)
+
+
+@login_required
+@is_member
+def unregister_event_member(request, *args, **kwargs):
+    # Unregister a user for an event by id
+    event = Event.objects.filter(id=kwargs.get("event_id")).first()
+    member = Member.objects.filter(user=request.user).first()
+    if event is None:
+        messages.error(request, "Event not found.")
+        return redirect("events")
+    if not EventRegistration.objects.filter(participant=member, event=event).exists():
+        messages.error(request, "You are not registered for this event.")
+        return redirect("event-detail", event_id=event.id)
+    event_registration = EventRegistration.objects.filter(
+        participant=member, event=event
+    ).first()
+    event_registration.delete()
+    event.current_participants = (
+        event.current_participants - 1 if event.current_participants >= 1 else 0
+    )
+    event.save()
+    messages.success(request, "Unregistered from the event successfully!")
+    return redirect("event-detail", event_id=event.id)
 
 
 @login_required

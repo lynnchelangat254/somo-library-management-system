@@ -29,8 +29,14 @@
           <p class="card-text"><strong>Description:</strong></p>
           <p class="card-text">{{ event.description|safe }}</p>
 
+
           {% if user.is_authenticated %}
-            {% if event.current_participants < event.max_participants %}
+            {% if  is_participant %}
+               <p class="text-success"><i class="fas fa-check"></i> You are already registered for this event.</p>
+               <a href="{% url 'unregister-event-member' event_id=event.id %}" class="btn btn-danger">
+                <i class="fas fa-user-minus"></i> Unregister
+              </a>
+            {% elif event.current_participants < event.max_participants %}
               <a href="{% url 'register-event-member' event_id=event.id %}" class="btn btn-save">
                 <i class="fas fa-user-plus"></i> Register
               </a>

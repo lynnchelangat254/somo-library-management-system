@@ -3,8 +3,10 @@
     <div class="d-flex gap-2">
       <!-- User Dropdown -->
       <div class="d-flex gap-3">
-        <a class="nav-item nav-link fw-bold" href="{% url "home" %}">Home</a>
-        <a class="nav-item nav-link fw-bold" href={% url "events" %}>Events</a>
+        <a class="nav-item nav-link fw-bold {% if request.path == '' %}text-decoration-underline{% endif %}" href="{% url 'home'%}">Home</a>
+        <a class="nav-item nav-link fw-bold {% if request.path == '/books/' %}text-decoration-underline{% endif %}" href={% url "books" %}>Books</a>
+        <a class="nav-item nav-link fw-bold {% if request.path == '/events/' %}text-decoration-underline{% endif %}" href={% url "events" %}>Events</a>
+
       </div>
       {% if user.is_authenticated and not user.is_admin %}
         {% if user.role == "Librarian" %}

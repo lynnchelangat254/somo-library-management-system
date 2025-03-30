@@ -89,3 +89,25 @@ def membership(request, *args, **kwargs):
         return redirect("membership")
     form = MemberRequestForm()
     return render(request, "membership.html", {"form": form})
+
+
+def reset_password(request, *args, **kwargs):
+    """Reset Password Form"""
+    # TODO: Implement password reset functionality here
+    pass
+
+def update_profile(request, *args, **kwargs):
+    # TODO: Implement profile update functionality here
+    pass
+
+def contact_us(request, *args, **kwargs):
+    # TODO: Implement contact us functionality here
+    pass
+
+def faq(request, *args, **kwargs):
+    # TODO: Implement FAQ functionality here
+    pass
+
+def about_us(request, *args, **kwargs):
+    # TODO: Implement about us functionality here
+    pass

@@ -198,3 +198,8 @@ body {
   border-color: #f5c6cb;
   color: white !important;
 }
+
+
+.text-decoration-underline {
+  border-bottom: 2px !important;
+}
