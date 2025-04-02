@@ -24,8 +24,10 @@ def get_events(request, *args, **kwargs):
 def get_event(request, *args, **kwargs):
     # Fetch a specific event from the database
     event = Event.objects.filter(pk=kwargs.get("event_id")).first()
+    member = None
 
-    member = Member.objects.filter(user=request.user).first()
+    if request.user.is_authenticated:
+        member = Member.objects.filter(user=request.user).first()
     # check if member is already a participant
     is_participant = EventRegistration.objects.filter(participant=member).exists()
 
